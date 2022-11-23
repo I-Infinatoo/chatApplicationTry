@@ -35,14 +35,11 @@ socket.on('adminMessage', function (message) {
     console.log('message from admin', message);
 })
 
-socket.on('newUserMessage', function (message){
+socket.on('UserMessage', function (message){
 
     console.log('message from server --existing user log\nmessage', message);
 })
 
-socket.on('newUserConnecct', function (message){ 
-    console.log('message from server --existing user log\nmessage', message);
-})
 
 socket.on('disconnect', function() {
     console.log('disconnected from the server');

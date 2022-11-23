@@ -93,7 +93,7 @@ io.on('connection', (socket)=>{
     socket.on('messageFromUserConnect', (message)=>{
         console.log('message from user connect --server log', message);
 
-        socket.broadcast.emit('newUserMessage', {
+        io.emit('UserMessage', {
             from: message.from,
             text: message.text,
             joinedOn: new Date().getTime()

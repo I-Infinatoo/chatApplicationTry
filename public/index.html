@@ -9,16 +9,6 @@
 
     <!-- script will allow to make connections to the socket so beckend could accept those connections -->
     <script src="/socket.io/socket.io.js"></script> 
-    <script type="text/javascript">
-        let socket = io();
-
-        socket.on('connect', ()=> {
-            console.log("Connected to server.");
-        });
-
-        socket.on('disconnect', ()=> {
-            console.log("disconnected from server.");
-        });
-        </script>
+    <script src="./js/index.js"></script>
 </body>
 </html>

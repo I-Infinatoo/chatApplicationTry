@@ -81,16 +81,16 @@ io.on('connection', (socket)=>{
     console.log('A new connection has arrived --server log');
 
     // when user join 
-    socket.emit('adminMessage', generateMessage('Admin', 'Welcome to the chat!'));
+    socket.emit('Message', generateMessage('Admin', 'Welcome to the chat!'));
 
     // when a new user join in middle
     // socket.broadcast.emit('newUserConnect', {
-    socket.broadcast.emit('adminMessage', generateMessage('Admin', 'A new user has joined the chat!'));
+    socket.broadcast.emit('Message', generateMessage('Admin', 'A new user has joined the chat!'));
 
     socket.on('messageFromUserConnect', (message, callback)=>{
         console.log('message from user connect --server log', message);
 
-        io.emit('UserMessage', generateMessage(message.from, message.text));
+        io.emit('Message', generateMessage(message.from, message.text));
 
         // acknowledgement to be sent 
         callback('This is the server');

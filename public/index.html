@@ -7,6 +7,11 @@
 <body>
     <p>Welcome the the chat app.</p>
 
+    <form id="message-form">
+        <input type="text" name="message" placeholder="message">
+        <button type="submit" id="submit-btn">submit</button>
+    </form>
+
     <!-- script will allow to make connections to the socket so beckend could accept those connections -->
     <script src="/socket.io/socket.io.js"></script> 
     <script src="./js/index.js"></script>

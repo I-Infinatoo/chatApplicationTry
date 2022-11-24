@@ -8,6 +8,11 @@ const http = require('http');
 const path = require('path');
 const publicPath = path.join(__dirname, '/../public');
 
+
+const {generateMessage} = require('./utils/message');
+const { callbackify } = require('util');
+
+
 const port = process.env.PORT || 3000;
 
 let app = express();
@@ -76,28 +81,19 @@ io.on('connection', (socket)=>{
     console.log('A new connection has arrived --server log');
 
     // when user join 
-    socket.emit('adminMessage', {
-        from: 'admin',
-        text: 'Welcome to the chat!',
-        createdAt: new Date().getTime()
-    })
+    socket.emit('adminMessage', generateMessage('Admin', 'Welcome to the chat!'));
 
     // when a new user join in middle
     // socket.broadcast.emit('newUserConnect', {
-    socket.broadcast.emit('adminMessage', {
-        from: 'admin',
-        text: 'A new user has joined the chat!',
-        createdAt: new Date().getTime()
-    })
+    socket.broadcast.emit('adminMessage', generateMessage('Admin', 'A new user has joined the chat!'));
 
-    socket.on('messageFromUserConnect', (message)=>{
+    socket.on('messageFromUserConnect', (message, callback)=>{
         console.log('message from user connect --server log', message);
 
-        io.emit('UserMessage', {
-            from: message.from,
-            text: message.text,
-            joinedOn: new Date().getTime()
-        })
+        io.emit('UserMessage', generateMessage(message.from, message.text));
+
+        // acknowledgement to be sent 
+        callback('This is the server');
     })
 
 

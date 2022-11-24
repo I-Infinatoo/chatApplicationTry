@@ -44,3 +44,13 @@ socket.on('UserMessage', function (message){
 socket.on('disconnect', function() {
     console.log('disconnected from the server');
 })
+
+socket.emit('messageFromUserConnect', {
+    from: 'ishu',
+    text: 'hey!'
+},
+// this is the third argument, `message` is the acknowledgement sent by the server
+function(message) {
+    console.log('Got it', message);
+}
+)

@@ -9,7 +9,7 @@ const path = require('path');
 const publicPath = path.join(__dirname, '/../public');
 
 
-const {generateMessage} = require('./utils/message');
+const {generateMessage, generateLocationMessage} = require('./utils/message');
 const { callbackify } = require('util');
 
 
@@ -96,6 +96,13 @@ io.on('connection', (socket)=>{
         callback('This is the server');
     })
 
+
+    socket.on('createLocationMessage', (coordinates) => {
+
+        io.emit('locationMessage', generateLocationMessage('Admin', coordinates.lat, coordinates.lng))
+
+        // console.log(coordinates.lat, " ", coordinates.lng);
+    })
 
     socket.on('disconnect', ()=> {
         console.log('User has disconnected --server log');
